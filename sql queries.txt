@@ -1,0 +1,83 @@
+--selecting specific column from the table
+select CustomerId, CustomerName, CustomerPhoneNumber
+from tblCustomer
+where CustomerName='Shiv' or CustomerId=7
+
+
+--orderby ascending or descending
+select CustomerId, CustomerName, CustomerPhoneNumber
+from tblCustomer
+order by  CustomerName, CustomerId desc
+
+--alias feature 
+select CustomerId as ID,
+Customername as name, 
+customerphonenumber as phone
+from tblCustomer
+
+--display unique records
+select distinct customername
+from tblCustomer
+
+--wildcard operators
+select customername
+from tblCustomer
+where CustomerName like 's%'
+
+select customername
+from tblCustomer
+where CustomerName like '%v'
+
+select customername
+from tblCustomer
+where CustomerName like 's_m'
+
+select customername
+from tblCustomer
+where CustomerName like '%_'
+
+--wildcard operators doesn't start with
+select customername
+from tblCustomer
+where CustomerName like '[^S]%'
+
+--runtime calculated column
+select productid,
+productname,
+productcost,
+(ProductCost-50) as discount
+from tblproduct
+
+--Case Statments with SQL
+select productid,
+productname,
+(case
+when productcost > 100 and ProductCost < 201
+then 'Medium Cost'
+when ProductCost >201
+then 'High Cost'
+else 'NA'
+end) as costlevel,
+ProductCost
+from tblproduct
+
+--combine 2 result sets
+select * from tblproduct
+union all
+select* from tblAncillary
+
+--combine 1 result set
+select * from tblproduct
+union all
+select* from tblproduct
+
+--combine 1 result set to display unique rows
+select * from tblproduct
+union
+select* from tblproduct
+
+--Joins inner join
+select * from tblCustomer
+inner join tblAddress
+on tblCustomer.CustomerId=tblAddress.CustomerId
+select * from tblAddress
